@@ -1,0 +1,75 @@
+% ===========================================================================
+% cover.tex — 封面（严格按 Word 模板《5学术学位博士生论文封面》还原）
+%
+% 排版层次（从上到下）：
+%   1. 校徽（logo.png，约 2.5cm 高）——居中
+%   2. 学校名称横幅（cover_schoolname.jpeg）——居中
+%   3. 装饰横线（cover_deco.png）——居中
+%   4. "博士学位（毕业）论文"——22pt，居中
+%   5. 论文题目——黑体 26pt，居中
+%   6. 信息栏（学位申请人、指导教师等）——黑体 15pt，居中，行距 25pt
+%   7. 分类号/密级 行——12pt
+% ===========================================================================
+
+\thispagestyle{empty}
+
+\begin{center}
+
+% ===== 1. 校徽 =====
+% 从 Word 模板提取：image1.png（745×773 像素，约 2.5cm 展示高度）
+\includegraphics[height=2.5cm]{cover_logo.png}\\[6pt]
+
+% ===== 2. 学校名称横幅 =====
+% 从 Word 模板提取：image2.jpeg（858×232 像素）——"河北农业大学"艺术字体
+\includegraphics[height=1.0cm]{cover_schoolname.jpeg}\\[6pt]
+
+% ===== 3. 装饰横线 =====
+% 从 Word 模板提取：image3.png（2097×121 像素）——装饰性分割线
+\includegraphics[width=10cm]{cover_deco.png}\\[18pt]
+
+% ===== 4. 论文类型 =====
+% Word 模板字号：22pt（sz=44），居中
+{\fontsize{22pt}{30pt}\selectfont 博士学位（毕业）论文}\\[24pt]
+
+% ===== 5. 论文题目 =====
+% Word 模板：黑体 26pt（sz=52），居中
+{\fontsize{26pt}{40pt}\selectfont \thesistitlecnvalue}\\[24pt]
+
+% ===== 6. 信息栏 =====
+% Word 模板：黑体 15pt（sz=30），居中，行距 25pt（line=500）
+% 各信息项单独成行，每个占一行
+{\fontsize{15pt}{25pt}\selectfont
+ \begin{tabular}{c}
+   学位申请人：\@applicant \\[4pt]
+   指导教师：\@supervisor \\[4pt]
+   学科专业：\@majorcn \\[4pt]
+   学位类别：\@categorycn \\[4pt]
+   授予单位：\@unitname \\[4pt]
+   答辩日期：\@defensedate
+ \end{tabular}
+}\par
+
+% ===== 7. 分类号/密级 行（底部）=====
+% Word 模板：12pt（sz=24），靠左
+\vfill
+\noindent
+\parbox{0.45\textwidth}{\fontsize{12pt}{16pt}\selectfont
+  分类号：\underline{\makebox[2cm][c]{\@classification}}%
+}
+\hfill
+\parbox{0.45\textwidth}{\fontsize{12pt}{16pt}\selectfont
+  单位代码：\underline{\makebox[2cm][c]{10086}}%
+}\\[4pt]
+
+\noindent
+\parbox{0.45\textwidth}{\fontsize{12pt}{16pt}\selectfont
+  密\phantom{XX}级：\underline{\makebox[2cm][c]{\@security}}%
+}
+\hfill
+\parbox{0.45\textwidth}{\fontsize{12pt}{16pt}\selectfont
+  学\phantom{XX}号：\underline{\makebox[2cm][c]{\@studentid}}%
+}
+
+\end{center}
+
+\clearpage

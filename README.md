@@ -1,5 +1,3 @@
-# HBAU_Thesis_Template
-河北农业大学研究生学位论文overleaf/latex模版
 # 河北农业大学博士学位论文 LaTeX 模板
 
 ## 📋 项目概述

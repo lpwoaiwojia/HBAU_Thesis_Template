@@ -1,0 +1,51 @@
+% ===========================================================================
+% titlepage.tex — 扉页
+% 对应格式文件要求：扉页包含分类号、密级、单位代码、学号、
+% 中英文论文题目、学位申请人、指导教师、学科专业、学位类别等信息
+% ===========================================================================
+
+\thispagestyle{empty}
+
+% --- 第一行：分类号、密级、单位代码、学号（水平分布）---
+\noindent
+\parbox{0.45\textwidth}{%
+  分类号：\underline{\makebox[3cm][c]{\@classification}}%
+}
+\hfill
+\parbox{0.45\textwidth}{%
+  单位代码：\underline{\makebox[3cm][c]{10086}}%
+}\\[6pt]
+
+\noindent
+\parbox{0.45\textwidth}{%
+  密\phantom{XX}级：\underline{\makebox[3cm][c]{\@security}}%
+}
+\hfill
+\parbox{0.45\textwidth}{%
+  学\phantom{XX}号：\underline{\makebox[3cm][c]{\@studentid}}%
+}
+
+\vspace*{3cm}
+
+% --- 论文题目（中文）---
+\begin{center}
+  {\zihao{-1}\heiti\baselineskip=25pt \thesistitlecnvalue}\\[2cm]
+
+  {\zihao{-1}\heiti\baselineskip=25pt \thesistitleenvalue}\\[2cm]
+  
+  % --- 信息栏 ---
+ {\zihao{3} \heiti \baselineskip = 30pt
+   \begin{tabular}{c}
+     学位申请人：\@applicant \\[8pt]
+     指导教师：\@supervisor \\[8pt]
+     学科专业：\@majorcn \\[8pt]
+     学位类别：\@categorycn \\[8pt]
+     授予单位：\@unitname \\[8pt]
+     答辩日期：\@defensedate
+   \end{tabular}
+  }\par
+
+  \vspace*{2cm}
+
+
+\clearpage

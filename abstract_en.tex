@@ -1,0 +1,55 @@
+% ===========================================================================
+% abstract_en.tex — 英文摘要
+% 对应格式要求：
+%   - 字体均为 Times New Roman
+%   - 论文题目字号为加粗12pt，水平居中
+%   - 作者、专业、指导教师字号为10.5pt
+%   - "Abstract"字号为加粗12pt，水平居中
+%   - 内容字号为12pt
+%   - "Key words:"字号为加粗12pt，词条字号为12pt，词条之间用分号隔开
+% ===========================================================================
+
+\pagestyle{frontmatterstyle}
+
+\begin{center}
+  % 论文题目：加粗12pt，居中
+  {\zihao{-4}\bfseries \thesistitleenvalue}\\[6pt]
+
+  % 作者、专业、指导教师：10.5pt（五号），居中
+  {\zihao{5}
+   PhD Candidate: \@applicant \\
+   Supervisor: \@supervisor \\
+   Major: \@majorcn
+  }\\[12pt]
+
+  % Abstract 标题
+  {\zihao{-4}\bfseries Abstract}\\[6pt]
+\end{center}
+
+% 英文摘要内容：12pt（小四），行距18pt
+{\zihao{-4}\setlength{\baselineskip}{18pt}%
+As one of the main food crops, precise monitoring of rice phenology and early accurate estimation of yield are of great significance for ensuring food security, optimizing agricultural production management, and allocating agricultural resources. Traditional rice phenology monitoring relies on manual fixed-point observation, which is time-consuming, labor-intensive, subjective, and limited in coverage, making it difficult to achieve large-scale and high-frequency dynamic monitoring.
+
+With the advantages of high spatiotemporal resolution, low cost, and operational flexibility, UAV remote sensing technology provides a new technical approach for field-scale crop monitoring. Machine learning algorithms possess powerful data mining capabilities, feature learning abilities, and nonlinear fitting capacities, enabling effective analysis of the complex intrinsic relationships between remote sensing data and rice phenology and yield. Therefore, integrating UAV remote sensing with machine learning technology to construct efficient and accurate models for rice phenology monitoring and yield estimation at the field scale has important theoretical significance and application value for improving the precision of rice production management and ensuring food security.
+
+This study took rice as the research object and systematically conducted research on rice phenology monitoring and yield estimation based on UAV multispectral remote sensing imagery. The main research contents and results are as follows:
+
+(1) A method for identifying key rice phenological stages based on UAV multispectral imagery was developed. By analyzing the variation patterns of rice canopy spectral reflectance at different growth stages, multiple vegetation indices were extracted, and machine learning algorithms including Random Forest and Support Vector Machine were employed to construct rice phenology identification models. Results showed that vegetation indices combining red-edge and near-infrared bands performed best in phenological stage discrimination, with overall classification accuracy exceeding 95\%.
+
+(2) Rice yield estimation models based on multi-temporal UAV remote sensing data were constructed. Using multispectral data throughout the entire rice growth period, vegetation indices and texture features from key growth stages were extracted, and yield estimation models were established using Partial Least Squares Regression, Random Forest Regression, and Deep Neural Networks. The study demonstrated that fusing features from the heading and filling stages effectively improved estimation accuracy, with R² exceeding 0.85.
+
+(3) A method for early rice yield estimation based on dynamic characteristics of time-series vegetation indices was proposed. Using time-series remote sensing data from the early growth period (transplanting to heading stage), dynamic characteristic parameters of vegetation index curves were extracted, including growth rate, peak time, and area under the curve, to establish an early yield estimation model. This method achieved relatively accurate yield estimation 30--45 days before harvest, providing timely decision support for agricultural production management.
+
+(4) An end-to-end rice yield estimation method based on deep learning was developed. A deep learning model combining Convolutional Neural Networks and Long Short-Term Memory networks was constructed to learn spatiotemporal features directly from UAV multispectral image sequences, avoiding the tedious process of manual feature extraction required by traditional methods. Experimental results showed that the deep learning approach further improved estimation accuracy compared to traditional machine learning methods, with RMSE reduced by approximately 15\%.
+
+The methodology system for rice phenology monitoring and yield estimation based on UAV remote sensing and machine learning constructed in this study can provide scientific basis and technical support for crop growth monitoring and yield prediction in precision agriculture, which is of significant reference value for ensuring national food security.
+
+\vspace{0.5cm}
+
+% 关键词
+\noindent{\zihao{-4}\bfseries Keywords: }%
+{\zihao{-4}\setlength{\baselineskip}{18pt}%
+UAV remote sensing; machine learning; rice phenology monitoring; yield estimation; deep learning}
+}
+
+\clearpage

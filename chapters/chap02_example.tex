@@ -1,0 +1,130 @@
+% ===========================================================================
+% chapters/chap02_example.tex — 第二章 材料与方法（示例章节）
+% 本文件展示更多排版功能，包括：
+%   - 更复杂的公式
+%   - 子图（subcaption）
+%   - 长表格示例
+%   - 枚举列表
+% ===========================================================================
+
+\chapter{材料与方法}
+\label{chap:method}
+
+\section{研究区概况}
+\label{sec:study_area}
+
+研究区位于河北省保定市河北农业大学实验农场（38°49′N，115°26′E），该区域属于暖温带大陆性季风气候，年平均气温12.5℃，年平均降水量550~600~mm，主要集中在7--9月份。供试水稻品种为常规粳稻，于每年5月中旬移栽，10月上旬收获。
+
+\section{数据采集与处理}
+\label{sec:data}
+
+\subsection{无人机遥感数据采集}
+\label{subsec:uav}
+
+本研究采用大疆M300 RTK无人机搭载MS600Pro多光谱相机获取田间遥感影像，主要参数如下表所示：
+
+\begin{table}[htbp]
+  \centering
+  \caption{无人机与多光谱相机主要参数}
+  \label{tab:uav_params}
+  \bigskip
+  {\zihao{5}\normalfont Table~\ref{tab:uav_params} Main parameters of UAV and multispectral camera}\\[4pt]
+  \begin{tabular}{lll}
+    \toprule
+    参数 & 规格 \\
+    \midrule
+    无人机型号 & 大疆M300 RTK \\
+    相机型号 & MS600Pro \\
+    光谱波段数 & 6（蓝、绿、红、红边、近红外1、近红外2） \\
+    飞行高度 & 30~m \\
+    地面分辨率 & 2~cm/pixel \\
+    飞行速度 & 3~m/s \\
+    航向重叠率 & 80\% \\
+    旁向重叠率 & 70\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{数据预处理}
+\label{subsec:preprocess}
+
+遥感影像预处理包括辐射定标、大气校正、几何校正和影像拼接等步骤。辐射定标将原始DN值转换为辐射亮度值，大气校正采用ENVI的FLAASH模块进行。
+
+植被指数（Vegetation Indices, VIs）是表征植被生长状态的重要参数，常用的植被指数计算公式如下：
+
+归一化植被指数（NDVI）：
+\begin{equation}
+  \label{eq:ndvi}
+  \text{NDVI} = \frac{NIR - Red}{NIR + Red}
+\end{equation}
+
+归一化红边植被指数（NDRE）：
+\begin{equation}
+  \label{eq:ndre}
+  \text{NDRE} = \frac{NIR - \text{Red\_Edge}}{NIR + \text{Red\_Edge}}
+\end{equation}
+
+比值植被指数（RVI）：
+\begin{equation}
+  \label{eq:rvi}
+  \text{RVI} = \frac{NIR}{Red}
+\end{equation}
+
+其中，$NIR$ 表示近红外波段的反射率，$Red$ 表示红光波段的反射率，$\text{Red\_Edge}$ 表示红边波段的反射率。
+
+\section{研究方法}
+\label{sec:method}
+
+\subsection{随机森林算法}
+\label{subsec:rf}
+
+随机森林（Random Forest, RF）是一种基于决策树的集成学习方法，通过Bootstrap采样构建多棵决策树，并综合各决策树的预测结果得到最终预测值。算法流程如下：
+
+\begin{enumerate}[itemsep=0pt,parsep=0pt]
+  \item 从原始训练集中通过Bootstrap方法抽取 $N$ 个子样本集；
+  \item 对每个子样本集构建一棵决策树，在每个节点分裂时，从全部 $M$ 个特征中随机选取 $m$ 个特征（$m \ll M$）作为候选分裂特征；
+  \item 重复步骤1和2，构建 $K$ 棵决策树，形成随机森林；
+  \item 对于分类任务采用投票法确定最终类别，对于回归任务采用均值法确定最终预测值。
+\end{enumerate}
+
+\subsection{深度学习方法}
+\label{subsec:dl}
+
+本研究构建了结合卷积神经网络（CNN）和长短期记忆网络（LSTM）的混合模型，CNN用于提取空间特征，LSTM用于提取时序特征。网络结构如图~\ref{fig:model_architecture}所示。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{example-image}
+  \caption{CNN-LSTM混合模型结构示意图}
+  \label{fig:model_architecture}
+  \bigskip
+  \centering
+  {\zihao{5}\normalfont Figure~\ref{fig:model_architecture} Schematic diagram of CNN-LSTM hybrid model architecture}
+\end{figure}
+
+\subsection{模型评价指标}
+\label{subsec:metrics}
+
+本研究采用以下指标对模型性能进行评价：
+
+\begin{itemize}[itemsep=0pt,parsep=0pt]
+  \item 决定系数（Coefficient of Determination, $R^2$）：
+    \begin{equation}
+      \label{eq:r2}
+      R^2 = 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}
+    \end{equation}
+
+  \item 均方根误差（Root Mean Square Error, RMSE）：
+    \begin{equation}
+      \label{eq:rmse}
+      \text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}
+    \end{equation}
+
+  \item 平均绝对误差（Mean Absolute Error, MAE）：
+    \begin{equation}
+      \label{eq:mae}
+      \text{MAE} = \frac{1}{n}\sum_{i=1}^{n}|y_i - \hat{y}_i|
+    \end{equation}
+\end{itemize}
+
+其中 $y_i$ 为实际观测值，$\hat{y}_i$ 为模型预测值，$\bar{y}$ 为实际观测值的平均值，$n$ 为样本数量。

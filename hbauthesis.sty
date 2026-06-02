@@ -1,0 +1,159 @@
+% ===========================================================================
+% hbauthesis.sty — 河北农业大学博士学位论文格式定义包
+% 对应格式文件：《河北农业大学研究生学位（毕业）论文格式要求及撰写规范》
+% 编译器：XeLaTeX（Overleaf 中 Menu → Compiler → XeLaTeX）
+% ===========================================================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hbauthesis}
+
+% ===== 页面设置 =====
+% A4纸，左30mm，右25mm，上30mm，下25mm
+\RequirePackage[
+  a4paper,
+  left=30mm, right=25mm,
+  top=30mm, bottom=25mm,
+  headheight=15pt,
+  headsep=10mm,
+  footskip=18mm,
+]{geometry}
+
+% ===== 常用宏包 =====
+\RequirePackage{amsmath,amssymb,amsthm}
+\RequirePackage{graphicx}
+\RequirePackage{float}
+\RequirePackage{subcaption}
+\RequirePackage{booktabs}
+\RequirePackage{longtable}
+\RequirePackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{enumitem}
+\RequirePackage{xcolor}
+\RequirePackage[colorlinks=false,linktoc=all,hidelinks]{hyperref}
+
+% ===== 行距 =====
+\RequirePackage{setspace}
+\setstretch{1.5}
+
+% ===== 页眉页脚（fancyhdr）=====
+\RequirePackage{fancyhdr}
+
+% 正文页眉页脚
+\fancypagestyle{thesisheader}{%
+  \fancyhf{}%
+  \fancyhead[CO]{\zihao{5}\thesisitle}%
+  \fancyhead[CE]{\zihao{5}河北农业大学博士学位论文}%
+  \fancyfoot[RO]{\zihao{5}\thepage}%
+  \fancyfoot[LE]{\zihao{5}\thepage}%
+  \renewcommand{\headrulewidth}{1.5pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
+
+% 前置部分（摘要、目录）：无页眉，页码居中
+\fancypagestyle{frontmatterstyle}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
+
+% plain 样式
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
+
+% ===== 标题格式 =====
+\ctexset{
+  chapter={
+    name={\songti 第,章},
+    number={\arabic{chapter}},
+    format={\centering\zihao{3}\heiti},
+    beforeskip={20pt},
+    afterskip={20pt},
+    fixskip=true,
+    pagestyle=thesisheader,
+  },
+  section={
+    format={\zihao{4}\songti},
+    beforeskip={15pt},
+    afterskip={15pt},
+    afterindent=true,
+  },
+  subsection={
+    format={\zihao{-4}\heiti},
+    beforeskip={12pt},
+    afterskip={12pt},
+    afterindent=true,
+  },
+  subsubsection={
+    format={\zihao{-4}\heiti},
+    beforeskip={12pt},
+    afterskip={12pt},
+    afterindent=true,
+  },
+  contentsname={\hfill\zihao{3}\heiti 目\hspace{1em}录\hfill},
+}
+
+\setcounter{tocdepth}{3}
+
+% ===== 图表标题 =====
+\RequirePackage[labelsep=space]{caption}
+\AtBeginDocument{%
+  \DeclareCaptionFont{wuxuhao}{\zihao{5}}%
+  \captionsetup[figure]{%
+    position=bottom,
+    font=wuxuhao,
+    aboveskip=6pt,
+    belowskip=6pt,
+  }%
+  \captionsetup[table]{%
+    position=top,
+    font=wuxuhao,
+    aboveskip=6pt,
+    belowskip=6pt,
+  }%
+}
+
+% ===== 参考文献 =====
+\RequirePackage[
+  backend=biber,
+  style=gb7714-2015,
+  gbalign=gb7714-2015,
+  maxbibnames=3,
+  minbibnames=3,
+  url=false,
+  doi=false,
+  sorting=none,
+]{biblatex}
+
+% ===== 孤行控制 =====
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% ===== 封面信息命令 =====
+\newcommand{\classification}[1]{\def\@classification{#1}}
+\newcommand{\security}[1]{\def\@security{#1}}
+\newcommand{\studentid}[1]{\def\@studentid{#1}}
+\newcommand{\thesistitlecn}[1]{\def\thesistitlecnvalue{#1}}
+\newcommand{\thesistitleen}[1]{\def\thesistitleenvalue{#1}}
+\newcommand{\thesisitle}{\thesistitlecnvalue}
+\newcommand{\applicant}[1]{\def\@applicant{#1}}
+\newcommand{\supervisor}[1]{\def\@supervisor{#1}}
+\newcommand{\majorcn}[1]{\def\@majorcn{#1}}
+\newcommand{\categorycn}[1]{\def\@categorycn{#1}}
+\newcommand{\unitname}[1]{\def\@unitname{#1}}
+\newcommand{\defensedate}[1]{\def\@defensedate{#1}}
+
+% 默认值
+\thesistitlecn{论文中文题目}
+\thesistitleen{English Title of the Thesis}
+\applicant{姓名}
+\supervisor{导师姓名\quad 教授}
+\majorcn{专业名称}
+\categorycn{工学博士}
+\unitname{河北农业大学}
+\defensedate{二〇二六年六月}

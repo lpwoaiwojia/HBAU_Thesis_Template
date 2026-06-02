@@ -1,0 +1,126 @@
+% ===========================================================================
+% chapters/chap04_results.tex — 第四章 结果与分析（示例章节）
+% ===========================================================================
+
+\chapter{结果与分析}
+\label{chap:results}
+
+\section{不同处理对水稻生长性状的影响}
+\label{sec:growth_traits}
+
+\subsection{株高变化特征}
+\label{subsec:plant_height}
+
+图~\ref{fig:plant_height}展示了不同施氮处理下水稻株高的动态变化规律。整体呈"S"型增长趋势，在拔节至抽穗期增长最快。高氮处理（T3）在各生育期株高均高于中氮（T2）和低氮（T1）处理，其中T3处理在抽穗期的株高较T1处理增加约8.3\%。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{example-image}
+  \caption{不同施氮处理下水稻株高动态变化}
+  \label{fig:plant_height}
+  \bigskip
+  \centering
+  {\zihao{5}\normalfont Figure~\ref{fig:plant_height} Dynamic changes of plant height under different nitrogen treatments}
+\end{figure}
+
+\subsection{叶面积指数动态}
+\label{subsec:lai}
+
+叶面积指数（LAI）的生育期变化呈先升后降的单峰曲线，在抽穗期达到最大值。T2处理的LAI峰值最高，达到6.8，显著高于T1处理的5.6（$p<0.05$），但与T3处理（7.0）差异不显著。
+
+\begin{table}[htbp]
+  \centering
+  \caption{不同处理水稻关键生育期LAI变化}
+  \label{tab:lai}
+  \bigskip
+  {\zihao{5}\normalfont Table~\ref{tab:lai} LAI changes at key growth stages under different treatments}\\[4pt]
+  \begin{tabular}{lcccc}
+    \toprule
+    处理 & 分蘖期 & 拔节期 & 抽穗期 & 灌浆期 \\
+    \midrule
+    T1（低氮） & 2.1 & 4.3 & 5.6 & 4.2 \\
+    T2（中氮） & 2.5 & 5.1 & 6.8 & 5.0 \\
+    T3（高氮） & 2.6 & 5.3 & 7.0 & 5.1 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{基于植被指数的水稻物候期识别}
+\label{sec:phenology_id}
+
+\subsection{不同生育期冠层光谱特征}
+\label{subsec:spectral}
+
+不同生育期水稻冠层光谱反射率存在显著差异。在水稻生长前期（分蘖-拔节期），可见光波段的反射率相对较高；进入生殖生长期（抽穗-灌浆期）后，近红外波段反射率显著增加；成熟期由于叶片衰老，各波段反射率均发生变化。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{example-image}
+  \caption{不同生育期水稻冠层光谱反射率曲线}
+  \label{fig:spectral}
+  \bigskip
+  \centering
+  {\zihao{5}\normalfont Figure~\ref{fig:spectral} Canopy spectral reflectance curves at different growth stages}
+\end{figure}
+
+\subsection{植被指数时序变化}
+\label{subsec:vi_time}
+
+NDVI和NDRE的时序变化均呈先升后降的趋势，但两者的变化特征存在差异。NDVI在抽穗期达到最大值后趋于饱和，而NDRE在整个生育期内变化更为敏感，尤其在抽穗后表现出更好的区分度。这表明NDRE在作物生长后期监测中具有优势。
+
+\subsection{物候期识别模型性能}
+\label{subsec:model_perf}
+
+基于多种植被指数组合，采用随机森林算法构建的水稻物候期识别模型取得了良好的分类效果。总体分类精度达到95.6\%，Kappa系数为0.94。各生育期的分类精度如表~\ref{tab:phenology_acc}所示。
+
+\begin{table}[htbp]
+  \centering
+  \caption{物候期识别模型分类精度}
+  \label{tab:phenology_acc}
+  \bigskip
+  {\zihao{5}\normalfont Table~\ref{tab:phenology_acc} Classification accuracy of phenology identification model}\\[4pt]
+  \begin{tabular}{lccc}
+    \toprule
+    生育期 & 精确率（\%） & 召回率（\%） & F1分数 \\
+    \midrule
+    分蘖期 & 94.2 & 92.8 & 93.5 \\
+    拔节期 & 93.5 & 95.1 & 94.3 \\
+    抽穗期 & 96.8 & 97.2 & 97.0 \\
+    灌浆期 & 95.3 & 94.6 & 94.9 \\
+    成熟期 & 97.1 & 96.5 & 96.8 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{基于多时相遥感数据的水稻产量估测}
+\label{sec:yield_estimation}
+
+\subsection{单一生育期产量估测模型}
+\label{subsec:single_stage}
+
+利用各生育期单独建立的产量估测模型中，抽穗期模型的估测精度最高（$R^2=0.82$，RMSE=0.58~t/ha），其次是灌浆期（$R^2=0.79$）。分蘖期和拔节期模型的估测精度相对较低，但也能达到$R^2>0.60$的水平。
+
+\subsection{多生育期特征融合模型}
+\label{subsec:multi_stage}
+
+将抽穗期和灌浆期的特征进行融合后，模型估测精度显著提高。不同建模方法的对比结果如表~\ref{tab:model_compare}所示。
+
+\begin{table}[htbp]
+  \centering
+  \caption{不同建模方法产量估测性能对比}
+  \label{tab:model_compare}
+  \bigskip
+  {\zihao{5}\normalfont Table~\ref{tab:model_compare} Performance comparison of different modeling methods}\\[4pt]
+  \begin{tabular}{lccc}
+    \toprule
+    方法 & $R^2$ & RMSE（t/ha） & MAE（t/ha） \\
+    \midrule
+    PLSR & 0.83 & 0.52 & 0.41 \\
+    RF & 0.86 & 0.47 & 0.36 \\
+    GBRT & 0.87 & 0.45 & 0.34 \\
+    CNN-LSTM & 0.91 & 0.38 & 0.28 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+结果表明，深度学习方法（CNN-LSTM）的估测精度最高，$R^2$达到0.91，RMSE为0.38~t/ha，较传统机器学习方法（RF）的RMSE降低了约19\%。随着生育期的推进，各模型的估测精度呈现逐渐提高的趋势，利用全生育期数据构建的模型估测效果最佳。

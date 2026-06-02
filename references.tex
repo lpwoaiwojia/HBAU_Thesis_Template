@@ -1,0 +1,17 @@
+% ===========================================================================
+% references.tex — 参考文献
+% 对应格式要求：
+%   - 参考文献一律放在结论之后
+%   - 采用顺序编码制，按引用顺序排列
+%   - 参考文献表著录项目齐全
+%   - 每篇文献都应在正文中被引用
+% ===========================================================================
+
+% 使用 biblatex 的 \printbibliography 命令打印参考文献
+% 根据 GB/T 7714-2015 格式输出
+% 标题格式：黑体三号，居中（由 hbauthesis.sty 中 \defbibheading 控制）
+
+\defbibheading{bibliography}{\chapter*{\centering\zihao{3}\heiti 参考文献}}
+\addcontentsline{toc}{chapter}{参考文献}
+
+\printbibliography[heading=bibliography]

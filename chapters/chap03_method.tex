@@ -1,0 +1,131 @@
+% ===========================================================================
+% chapters/chap03_method.tex — 第三章 研究方法与试验设计（示例章节）
+% ===========================================================================
+
+\chapter{研究方法与试验设计}
+\label{chap:method_design}
+
+\section{试验材料与设备}
+\label{sec:materials}
+
+\subsection{供试材料}
+\label{subsec:test_materials}
+
+本研究以常规粳稻为供试材料，供试品种包括"津稻263"和"津原85"两个主栽品种。试验于2024--2025年在河北省保定市河北农业大学实验农场（38°49′N，115°26′E）进行。
+
+供试土壤为潮褐土，0--20~cm耕层土壤基本理化性质为：pH值7.8，有机质含量18.5~g/kg，全氮含量1.12~g/kg，碱解氮含量95.6~mg/kg，有效磷含量22.3~mg/kg，速效钾含量156.8~mg/kg。
+
+\subsection{试验设计}
+\label{subsec:exp_design}
+
+试验采用随机区组设计，设3个施氮水平（N1：120~kg/hm²，N2：180~kg/hm²，N3：240~kg/hm²），每个处理设3次重复，共9个小区。小区面积为4~m~×~5~m~=~20~m²，区间埂宽30~cm，四周设保护行。
+
+\begin{table}[htbp]
+  \centering
+  \caption{试验处理设置}
+  \label{tab:treatments}
+  \bigskip
+  {\zihao{5}\normalfont Table~\ref{tab:treatments} Experimental treatment design}\\[4pt]
+  \begin{tabular}{cllc}
+    \toprule
+    处理编号 & 处理名称 & 施氮量（kg/hm²） & 重复次数 \\
+    \midrule
+    T1 & 低氮 & 120 & 3 \\
+    T2 & 中氮 & 180 & 3 \\
+    T3 & 高氮 & 240 & 3 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{无人机遥感数据采集设备}
+\label{subsec:uav_equipment}
+
+本研究采用大疆 M300 RTK 四旋翼无人机平台，搭载 MS600Pro 多光谱相机。MS600Pro 相机配备6个光谱波段，具体参数如第~\ref{chap:method}~章表~\ref{tab:uav_params}~所示。数据采集时间为当地时间10:00--14:00，天气条件为无风或微风、无云或少云。
+
+\section{数据采集方法}
+\label{sec:data_collection}
+
+\subsection{遥感数据采集}
+\label{subsec:remote_sensing}
+
+于水稻主要生育期（分蘖期、拔节期、抽穗期、灌浆期和成熟期）利用无人机搭载多光谱相机获取遥感影像。飞行高度30~m，航向重叠率80\%，旁向重叠率70\%，地面分辨率2~cm/pixel。每个生育期采集一次数据，共采集6个生育期的数据。
+
+\subsection{地面数据采集}
+\label{subsec:ground_data}
+
+\subsubsection{农学参数测定}
+于各生育期在每个小区选取代表性植株5穴，测定株高、叶面积指数（LAI）、SPAD值等农学参数。收获期各小区单独收割、脱粒、晒干后称重，换算为标准含水量（14\%）下的实际产量。
+
+\subsubsection{冠层光谱测定}
+采用ASD FieldSpec~4 地物光谱仪同步测量水稻冠层光谱反射率，测量范围为350--2500~nm，视场角25°。每个小区测量5次，取平均值作为该小区的冠层光谱数据。
+
+\subsection{数据预处理方法}
+\label{subsec:preprocess}
+
+遥感影像预处理使用Pix4Dmapper软件完成，包括：
+\begin{enumerate}[itemsep=0pt,parsep=0pt]
+  \item 原始影像的辐射定标与大气校正；
+  \item 基于POS数据的几何校正；
+  \item 多波段影像拼接与裁剪；
+  \item 感兴趣区域（ROI）提取；
+  \item 植被指数计算与特征提取。
+\end{enumerate}
+
+\section{数据分析方法}
+\label{sec:analysis}
+
+\subsection{植被指数选取}
+\label{subsec:vi_selection}
+
+本研究选取了以下植被指数用于分析：
+
+\begin{itemize}[itemsep=0pt,parsep=0pt]
+  \item 归一化植被指数 NDVI $= (NIR - R) / (NIR + R)$
+  \item 归一化红边植被指数 NDRE $= (NIR - RE) / (NIR + RE)$
+  \item 比值植被指数 RVI $= NIR / R$
+  \item 增强型植被指数 EVI $= 2.5 \times (NIR - R) / (NIR + 6 \times R - 7.5 \times B + 1)$
+  \item 土壤调节植被指数 SAVI $= (NIR - R) \times (1 + L) / (NIR + R + L)$
+\end{itemize}
+
+\subsection{机器学习方法}
+\label{subsec:ml}
+
+本研究采用了以下机器学习方法进行建模：
+
+\begin{enumerate}[itemsep=0pt,parsep=0pt]
+  \item 随机森林（Random Forest, RF）
+  \item 支持向量机（Support Vector Machine, SVM）
+  \item 偏最小二乘回归（Partial Least Squares Regression, PLSR）
+  \item 梯度提升回归树（Gradient Boosting Regression Tree, GBRT）
+\end{enumerate}
+
+模型性能通过5折交叉验证进行评估，以$R^2$、RMSE和MAE作为评价指标。
+
+\subsection{深度学习方法}
+\label{subsec:dl_method}
+
+构建了基于卷积神经网络（CNN）与长短期记忆网络（LSTM）的混合模型（CNN-LSTM），网络结构包括：
+
+\begin{enumerate}[itemsep=0pt,parsep=0pt]
+  \item 输入层：多光谱影像序列数据
+  \item 卷积层：3层2D卷积，提取空间特征
+  \item 池化层：最大池化，降维
+  \item LSTM层：2层LSTM，提取时序特征
+  \item 全连接层：2层全连接，映射到产量
+  \item 输出层：单节点回归输出
+\end{enumerate}
+
+\section{技术路线}
+\label{sec:tech_route}
+
+本研究的技术路线如图~\ref{fig:tech_route}所示，主要包括以下步骤：数据采集、数据预处理、特征提取、模型构建、模型评估与应用。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{example-image}
+  \caption{本研究技术路线图}
+  \label{fig:tech_route}
+  \bigskip
+  \centering
+  {\zihao{5}\normalfont Figure~\ref{fig:tech_route} Technical roadmap of this study}
+\end{figure}

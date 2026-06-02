@@ -1,0 +1,83 @@
+% ===========================================================================
+% 河北农业大学博士学位论文 — 主文件
+% 学校：河北农业大学 | 类型：博士学位论文
+%
+% ★ 必须的操作（否则无法编译）：
+%   1. 点击 Overleaf 左上角 Menu
+%   2. Settings → Compiler → 选择 XeLaTeX
+%   3. 回到编辑器，点击 Recompile
+%
+% ★ 修改封面信息：
+%   在本文件靠后的"用户信息填写区"修改
+% ===========================================================================
+
+% ===== 编译器检测 =====
+\ifx\XeTeXrevision\undefined
+  \errmessage{========================================================================
+  编译引擎错误：当前使用 pdfLaTeX，本模板需要 XeLaTeX！
+
+  请按以下步骤操作：
+  1. 点击 Overleaf 左上角 Menu 按钮
+  2. 在 Settings -> Compiler 中选择 "XeLaTeX"
+  3. 点击 Recompile 按钮重新编译
+  ========================================================================}
+  \expandafter\stop
+\fi
+
+% ===== 文档类 =====
+% fontset=ubuntu：Overleaf 自动使用 Noto CJK 开源字体
+% 无需手动配置字体，\songti / \heiti 等命令自动可用
+\documentclass[UTF8,a4paper,twoside,openright,zihao=-4,fontset=ubuntu]{ctexbook}
+
+% 英文/数字字体
+\setmainfont{Times New Roman}
+
+% ===== 导入格式包 =====
+\usepackage{hbauthesis}
+
+% ===========================================================================
+% ★★ 用户信息填写区（请根据个人情况修改）★★
+% ===========================================================================
+
+\thesistitlecn{论文中文题目}
+\thesistitleen{English Title of the Thesis}
+\applicant{姓\quad 名}
+\supervisor{导师姓名\quad 教授}
+\majorcn{专业名称}
+\categorycn{工学博士}
+\unitname{河北农业大学}
+\defensedate{二〇二六年六月}
+
+% ===========================================================================
+% 文档正文
+% ===========================================================================
+
+\begin{document}
+
+% ===== 前置部分 =====
+\include{cover}
+\include{titlepage}
+
+\pagestyle{frontmatterstyle}
+\pagenumbering{Roman}
+\include{statement}
+\include{abstract}
+\include{abstract_en}
+\include{toc}
+
+% ===== 正文部分 =====
+\pagestyle{thesisheader}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\include{chapters/chap01_intro}
+\include{chapters/chap02_example}
+\include{chapters/chap03_method}
+\include{chapters/chap04_results}
+\include{chapters/chap05_discussion}
+\include{chapters/chap06_discussion}
+\include{conclusion}
+\include{references}
+\include{acknowledgements}
+
+\end{document}

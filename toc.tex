@@ -1,0 +1,20 @@
+% ===========================================================================
+% toc.tex — 目录
+% 对应格式要求：
+%   "目 录"黑体三号，字符间距为一个字符，段前段后间距为1行
+%   目录中中文字体为宋体、页码为Times New Roman字体
+%   目录最多列至三级标题（对应 tocdepth=3）
+%   使用 \tableofcontents 自动生成目录
+%   页码格式：罗马数字（i, ii, iii, ...）
+% ===========================================================================
+
+\pagestyle{frontmatterstyle}
+\pagenumbering{Roman}  % 目录页码用大写罗马数字
+
+\tableofcontents
+
+\clearpage
+
+% 重置页码，正文从阿拉伯数字1开始
+\pagenumbering{arabic}
+\setcounter{page}{1}
